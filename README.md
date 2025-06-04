@@ -1,37 +1,136 @@
 
-Introductions:
-Customer Lifetime Value(CLTV)
-"Customer Lifetime Value is a monetary value that represents the amount of revenue or profit a customer will give the company over the period of the relationship". CLTV demonstrates the implications of acquiring long-term customers compare to short-term customers. Customer lifetime value (CLV) can help you to answers the most important questions about sales to every company:
-•	How to Identify the most profitable customers?
-•	How can a company offer the best product and make the most money?
-•	How to segment profitable customers?
-•	How much budget need to spend to acquire customers?
-CLTV indicates the total revenue from the customer during the entire relationship. CLTV helps companies to focus on those potential customers who can bring in more revenue in the future.
+# 🧮 Customer Lifetime Value (CLTV) Prediction
 
+##  Overview
 
-CLTV = ((Average Order Value x Purchase Frequency)/Churn Rate) x Profit margin.
+**Customer Lifetime Value (CLTV)** is a predictive metric that estimates the total revenue or profit a business can expect from a customer over the course of their relationship. Understanding CLTV helps companies identify high-value customers, make informed marketing decisions, and allocate acquisition budgets more efficiently.
 
-Please check the below step for how to calculate CLTV.
+This project demonstrates the calculation of CLTV using transaction data, followed by predictive modeling using machine learning techniques such as Random Forest, Gradient Boosting, and XGBoost.
 
-Algorithm:
-Step1: Calculate CLTV.
-1.	Calculate the average order value of customers:
-1.	Average order value =  Total money spent / total number of transactions 
-2.	Calculate Purchase Frequency: 
-1.	Purchase Frequency = Total Number of Orders / Total Number of Customers
-3.	Calculate Repeat rate and Churn rate:
-1.	Repeat rate = How many customers have numbers of transactions more than one / total numbers of customers
-2.	Churn rate = 1 - repeat rate
-4.	Calculate the profit margin:
-1.	Profit margin is the commonly used profitability ratio. It represents how much percentage of total sales has earned as the gain. Let's assume our business has approx 5% profit on the total sale.
-2.	Profit margin = Total money spent on each customer * 0.05
-5.	Calculate customer lifetime value:
-1.	Customer value = (Average Order Value * Purchase Frequency) / Churn rate
-2.	Customer lifetime value = Customer value * Profit margin
-Step2: Predictive modelling.
-Build a regression model for existing customers. Take recent six-month data as independent variables and total revenue over existing time( here taking 2 years)  as a dependent variable and build a regression model on this data.
+---
 
-Pros and Cons of CLTV:
-CLTV helps you to design an effective business plan and also provide a chance to scale your business. CLTV draw meaningful customer segments these segment can help you to identify the needs of the different-different segment.
-Customer Lifetime Value is a tool, not a strategy. CLTV can figure out the most profitable customers, but how you are going to make a profit from them, it depends on your strategy. Generally, CLTV models are confused and misused. Obsession with CLTV may create blinders. Companies only focus on finding the best customer group and focusing on them and repeat the business, but it’s also important to give attention to other customers.
+##  Why CLTV Matters
+
+CLTV allows businesses to:
+
+* 📊 Identify their **most profitable customers**
+* 🎯 Design **targeted marketing strategies**
+* 💰 Optimize **customer acquisition cost (CAC)**
+* 🔄 Segment and retain **high-value customer segments**
+* 📈 Forecast **long-term business growth**
+
+---
+
+## 🧠 CLTV Formula
+
+We use a basic formula to compute CLTV:
+
+```
+CLTV = ((Average Order Value × Purchase Frequency) / Churn Rate) × Profit Margin
+```
+
+---
+
+## 🧪 CLTV Calculation – Step-by-Step
+
+### Step 1: Data Preprocessing
+
+* Clean and merge transaction data
+* Remove entries with missing Customer IDs
+* Create new columns like `TotalPrice = Quantity × Price`
+
+### Step 2: Feature Calculation
+
+1. **Average Order Value (AOV)**
+   `AOV = Total Revenue / Total Number of Transactions`
+
+2. **Purchase Frequency**
+   `Purchase Frequency = Total Number of Orders / Total Number of Customers`
+
+3. **Repeat Rate & Churn Rate**
+   `Repeat Rate = Customers with >1 Transaction / Total Customers`
+   `Churn Rate = 1 - Repeat Rate`
+
+4. **Profit Margin**
+   For simplicity, we assume a 5% margin:
+   `Profit Margin = Total Spend per Customer × 0.05`
+
+5. **CLTV**
+
+   * `Customer Value = (AOV × Purchase Frequency) / Churn Rate`
+   * `CLTV = Customer Value × Profit Margin`
+
+---
+
+## 🔍 Predictive Modeling
+
+After calculating historic CLTV, we use machine learning to **predict future CLTV** for each customer.
+
+* **Target (y)**: Total revenue (CLV) over the 2-year period
+* **Features (X)**: Recency, Tenure, Frequency, Avg Order Value, and additional engineered features
+
+### Models Used
+
+* 🌲 Random Forest Regressor
+* 🌐 XGBoost Regressor
+* 📈 Gradient Boosting Regressor
+
+Model performance is evaluated using:
+
+* **Root Mean Squared Error (RMSE)**
+* **R² Score**
+
+---
+
+## 📊 Results
+
+* Achieved up to **82% R² Score** with Random Forest
+* Improvements tested using:
+
+  * Feature engineering (e.g., Revenue per Day)
+  * Hyperparameter tuning
+  * Model comparison
+
+---
+
+## ✅ Pros of CLTV Modeling
+
+* Enhances customer segmentation
+* Informs strategic budgeting and marketing
+* Helps forecast long-term revenue
+* Supports targeted retention efforts
+
+---
+
+## ⚠️ Limitations
+
+* CLTV is a **tool**, not a strategy — success depends on how insights are used.
+* Over-focusing on profitable customers may overlook untapped segments.
+* Misuse or misinterpretation of CLTV models can lead to biased decisions.
+
+---
+
+## 📁 Dataset
+
+The dataset used is from Kaggle:
+[Online Retail Dataset – by Lakshmi N Pathi](https://www.kaggle.com/datasets/lakshmi25npathi/online-retail-dataset)
+
+---
+
+## 📂 Project Structure
+
+```
+├── data/
+│   └── online_retail_II.xlsx
+├── clv_modeling.ipynb
+├── README.md
+```
+
+---
+
+## 🔧 Future Improvements
+
+* Use deep learning models for prediction
+* Include customer demographics for better segmentation
+* Deploy as a REST API for real-time prediction
 
